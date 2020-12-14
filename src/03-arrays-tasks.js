@@ -304,8 +304,9 @@ function get3TopItems(arr) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getPositivesCount(arr) {
+  const arrNew = arr.filter((num) => typeof num === 'number');
+  return arrNew.filter((num) => num > 0).length;
 }
 
 /**
@@ -321,11 +322,9 @@ function getPositivesCount(/* arr */) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented'); // const wordNumbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-  // return arr.map((u) => wordNumbers.indexOf(u))
-  //   .sort((a, b) => a - b)
-  //   .map((u) => wordNumbers.indexOf(u));
+function sortDigitNamesByNumericOrder(arr) {
+  const wordNumbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  return arr.map((u) => wordNumbers.indexOf(u)).sort((a, b) => a - b).map((u) => wordNumbers[u]);
 }
 
 /**
@@ -340,15 +339,18 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   [ -1, 1, -1, 1 ]      => 0
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
-function getItemsSum(/* arr */) {
-  throw new Error('Not implemented');
+function getItemsSum(arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+  return arr.reduce((value, value1) => value + value1);
 }
 
 /**
  * Returns the number of all falsy value in the specified array
  *
  * @param {array} arr
- * @return {array}
+ * @return {number}
  *
  * @example
  *  [] => 0
@@ -356,8 +358,8 @@ function getItemsSum(/* arr */) {
  *  [ -1, 'false', null, 0 ] => 2
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  return arr.filter((value) => Boolean(value) === false).length;
 }
 
 /**
@@ -374,8 +376,8 @@ function getFalsyValuesCount(/* arr */) {
  *    [ null, undefined, null ], null => 2
  *    [ true, 0, 1, 'true' ], true => 1
  */
-function findAllOccurences(/* arr, item */) {
-  throw new Error('Not implemented');
+function findAllOccurences(arr, item) {
+  return arr.filter((u) => u === item).length;
 }
 
 /**
@@ -389,8 +391,8 @@ function findAllOccurences(/* arr, item */) {
  *    [1, 2, 3, 4, 5]                   => '1,2,3,4,5'
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
-function toStringList(/* arr */) {
-  throw new Error('Not implemented');
+function toStringList(arr) {
+  return arr.join();
 }
 
 
@@ -459,8 +461,8 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  return Array(end - start + 1).fill().map((number, index) => start + index);
 }
 
 /**
@@ -474,8 +476,10 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const arrNew = [];
+  arr.map((number) => (arrNew.indexOf(number) === -1 ? arrNew.push(number) : ''));
+  return arrNew;
 }
 
 /**
@@ -566,8 +570,22 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  let left = [];
+  let middle = [];
+  let right = [];
+  let arrNew = [];
+  if (arr.length % 2 !== 0) {
+    left = arr.slice(0, arr.length / 2 - 0.5);
+    middle = arr.slice(arr.length / 2 - 0.5, arr.length / 2 + 0.5);
+    right = arr.slice(arr.length / 2 + 0.5, arr.length);
+    arrNew = right.concat(middle.concat(left));
+  } else {
+    left = arr.slice(0, arr.length / 2);
+    right = arr.slice(arr.length / 2, arr.length);
+    arrNew = right.concat(left);
+  }
+  return arrNew;
 }
 
 
